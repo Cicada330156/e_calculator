@@ -1,0 +1,46 @@
+<html>
+	<body>
+		<script>
+			function factorialize(num) {
+				if (num === 0 || num === 1) {
+					return 1;
+				}
+				for (var i = num - 1; i >= 1; i--) {
+					num *= i;
+				}
+				return num;
+			}
+			document.body.innerHTML += '<p>Calculating e:</p>';
+			
+			e = 0
+			eF = 0
+			
+			function addToE() {
+				e += 1/factorialize(eF);
+				eF++;
+			}
+			
+			function manualAddToE() {
+				eBefore = e;
+				addToE();
+				var button = document.getElementById("calcMore");
+				button.remove();
+				if(eBefore == e) {
+					document.body.innerHTML += '<p> Oh no! Looks like we can\'t go any further, to learn more about why, click <a href = \"https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/MAX_SAFE_INTEGER\" target="_blank">here</a>.</p>';
+				} else {
+					document.body.innerHTML += '<p>' + e + '</p>';
+					document.body.innerHTML += '<button onclick="manualAddToE()" id="calcMore">calculate more accurately</button>';
+				}
+			}
+			
+			for (i = 0; i < 5; i++) {
+				addToE();
+				document.body.innerHTML += '<p>' + e + '</p>';
+			}
+			
+			document.body.innerHTML += '<button onclick="manualAddToE()" id="calcMore">calculate more accurately</button>';
+			
+			factorialize(5);
+		</script>
+	</body>
+</html>
